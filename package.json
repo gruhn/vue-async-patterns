@@ -1,0 +1,15 @@
+{
+  "name": "vue-async-patterns",
+  "version": "1.0.0",
+  "dependencies": {
+    "vue": "^2.5.17"
+  },
+  "devDependencies": {
+    "node-static": "^0.7.10"
+  },
+  "scripts": {
+    "start": "static ."
+  },
+  "author": "Niklas Gruhn",
+  "license": "MIT"
+}
