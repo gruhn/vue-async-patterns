@@ -8,7 +8,7 @@
     "node-static": "^0.7.10"
   },
   "scripts": {
-    "start": "static ."
+    "start": "static . -H '{\"Cache-Control\": \"no-cache, must-revalidate, max-age=0\"}'"
   },
   "author": "Niklas Gruhn",
   "license": "MIT"
