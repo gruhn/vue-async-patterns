@@ -1,4 +1,4 @@
-import API from './API.js'
+import request from './request.js'
 
 export default {
   template: `
@@ -14,12 +14,32 @@ export default {
     </div>
   `,
 
+  data () {
+    return {
+      post: null,
+      comments: null,
+      sidebar: null
+    }
+  },
+
   created () {
     this.loadPost()
     this.loadSidebar()
     this.loadComments()
   },
 
-  mixins: [ API ]
+  methods: {
+    async loadPost () {
+      this.post = await request('./data/post.html')
+    },
+
+    async loadComments () {
+      this.comments = await request('./data/comments.html')
+    },
+
+    async loadSidebar () {
+      this.sidebar = await request('./data/sidebar.html')
+    }
+  }
 
 }
