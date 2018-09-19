@@ -24,44 +24,32 @@ export default {
       comments: null,
       sidebar: null,
 
-      loading: true
+      timeoutPassed: false
     }
   },
 
-  // async/await syntax
-  async created () {
-    const timeoutAsPromise = new Promise(resolve => {
-      setTimeout(resolve, 500)
-    })
-
-    await Promise.all([
-      timeoutAsPromise,
-      this.loadPost(),
-      this.loadSidebar()
-    ])
-
-    this.loading = false
-
-    this.loadComments()
-  },
-
-  // pure Promise syntax
-  /*
   created () {
-    const timeoutAsPromise = new Promise(resolve => {
-      setTimeout(resolve, 500)
-    })
+    setTimeout(() => {
+      this.timeoutPassed = true
+    }, 500)
 
-    Promise.all([
-      timeoutAsPromise,
-      this.loadPost(),
-      this.loadSidebar()
-    ]).then(() => {
-      this.loading = false
-      this.loadComments()
-    })
+    this.loadPost()
+    this.loadSidebar()
   },
-  */
+
+  computed: {
+    loading () {
+      return this.post === null ||
+        this.sidebar === null ||
+        this.timeoutPassed === false
+    }
+  },
+
+  watch: {
+    loading () {
+      this.loadComments()
+    }
+  },
 
   methods: {
     async loadPost () {
