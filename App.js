@@ -29,28 +29,37 @@ export default {
   },
 
   // async/await syntax
-  created () {
-    setTimeout(async () => {
-      await this.loadPost()
-      await this.loadSidebar()
+  async created () {
+    const timeoutAsPromise = new Promise(resolve => {
+      setTimeout(resolve, 500)
+    })
 
-      this.loading = false
+    await Promise.all([
+      timeoutAsPromise,
+      this.loadPost(),
+      this.loadSidebar()
+    ])
 
-      await this.loadComments()
-    }, 500)
+    this.loading = false
+
+    this.loadComments()
   },
 
   // pure Promise syntax
   /*
   created () {
-    setTimeout(() => {
-      this.loadPost()
-        .then(() => this.loadSidebar())
-        .then(() => {
-          this.loading = false
-          this.loadComments()
-        })
-    }, 500)
+    const timeoutAsPromise = new Promise(resolve => {
+      setTimeout(resolve, 500)
+    })
+
+    Promise.all([
+      timeoutAsPromise,
+      this.loadPost(),
+      this.loadSidebar()
+    ]).then(() => {
+      this.loading = false
+      this.loadComments()
+    })
   },
   */
 
