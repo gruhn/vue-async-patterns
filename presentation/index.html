@@ -1,0 +1,137 @@
+<html>
+<head>
+  <title>Synchronize with reactivity</title>
+  <script src="https://unpkg.com/vue@2.5.17/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue-keynote@1.0.9/dist/keynote.js"></script>
+
+  <link rel="stylesheet" href="https://unpkg.com/prismjs/themes/prism.css" />
+  <script src="https://unpkg.com/prismjs"></script>
+  <script src="https://unpkg.com/vue-prism-component@1.0.1/dist/vue-prism-component.min.js"></script>
+
+  <script>
+    Vue.component('prism', PrismComponent)
+
+  </script>
+
+  <style>
+    .centerize {
+      display: flex;
+      flex-flow: column nowrap;
+      align-items: center;
+      justify-content: space-around;
+    }
+
+    .github-logo {
+      height: 1.6em;
+      vertical-align: baseline;
+      margin: 0 5px -0.5em -5px;
+    }
+
+    .emphasize {
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    a {
+      display: block;
+      margin-top: 20px;
+      color: black;
+      text-decoration: none;
+    }
+
+    li {
+      text-align: left;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <Keynote>
+
+      <Author-Slide name="Niklas Gruhn" photo="https://avatars2.githubusercontent.com/u/26570572?s=400&u=7cd9973ce610969205bcae18cdeca3e21a5ed749&v=4">
+        <img src="./github-logo.png" class="github-logo"> @gruhn
+      </Author-Slide>
+
+      <Title-Slide title="Callbacks">
+        <prism language="javascript">
+request("data.json", function (result) {
+  /* ... */
+})
+        </prism>
+      </Title-Slide>
+
+      <Title-Slide title="Promises">
+        <prism language="javascript">
+request("data.json").then(function (result) {
+  // ...
+})
+        </prism>
+      </Title-Slide>
+
+      <Title-Slide title="Async functions">
+        <prism language="javascript">
+async function () {
+  const result = await request("data.json")
+
+  // ...
+}
+        </prism>
+      </Title-Slide>
+
+      <Title-Slide title="Synchronize with reactivity">
+        <a href="https://github.com/gruhn/vue-async-patterns">
+          github.com/<span class="emphasize">gruhn/vue-async-patterns</span>
+        </a>
+      </Title-Slide>
+
+      <Slide class="centerize">
+        <img src="./flow-async.png">
+      </Slide>
+
+      <Slide class="centerize">
+        <img src="./flow-synced-1.png">
+      </Slide>
+
+      <Slide class="centerize">
+        <img src="./flow-synced-2.png">
+      </Slide>
+
+      <Slide class="centerize">
+        <img src="./flow-synced-3.png">
+      </Slide>
+
+      <Slide class="centerize">
+        <img src="./flow-synced-4.png">
+      </Slide>
+
+      <Title-Slide title="Promise.all()">
+        <prism language="javascript">
+Promsie.all([ promise1, promise2, promise3 ])
+  .then( /* ... */ )
+  .catch( /* ... */ )
+        </prism>
+      </Title-Slide>
+
+      <Title-Slide title="Vorteile">
+        <ul>
+          <li>leserlicher</li>
+          <li>weniger fehleranfällig</li>
+          <li>klappt mit allem (Promises, Callbacks, Event Handler, ...)</li>
+        </ul>
+      </Title-Slide>
+
+      <Title-Slide title="Synchronize with reactivity">
+        <a href="https://github.com/gruhn/vue-async-patterns">
+          github.com/<span class="emphasize">gruhn/vue-async-patterns</span>
+        </a>
+      </Title-Slide>
+
+    </Keynote>
+  </div>
+
+  <script>
+    new Vue({ el: '#app' }) // Create a vue app!
+  </script>
+</body>
+</html>
